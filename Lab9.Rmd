@@ -1,7 +1,7 @@
 ---
 title: "Lab9"
-author: "Your Name"
-date: "2024-11-07"
+author: "Jo Starenky"
+date: "2024-11-14"
 output: "github_document"
 ---
 
@@ -13,7 +13,7 @@ library(bruceR)
 library(haven)
 
 
-lab9data<-read_sav("C:/Users/Colin/Documents/lab9data.sav")
+lab9data<-read_sav("/Users/jostarenky/Documents/GitHub/Lab9/lab9data.sav")
 
 
 
@@ -52,16 +52,42 @@ EFA(lab9data, "FSMI", 1:6, rev = 3, method = "pa", plot.scree = TRUE, nfactors =
 # Now test reliability for the status seeking subscale
 ```{r}
 
+lab9data$FSMI3_R <- 36 - lab9data$FSMI3
+Alpha(lab9data, "FSMI", 31:36, rev = 36)
+
 ```
 # Q1: What is the Cronbach's alpha of this subscale? Is it a reliable measure of status seeking? Why? 
+The Cronbach's alpha of this scale is 0.83, which means it is a reliable measure of status seeking because a Cronbach's alpha above 0.7 is considered "acceptable", and over 0.8 is considered "good"
 
 # Now run a factor analysis on the Mate Retention (Breakup Concern) subscale
 ```{r}
 
+EFA(lab9data, "FSMI", 49:54, method = "pa", plot.scree = TRUE, nfactors = c("parallel"))
 
 
 ```
 
 # Q2: How many factors can you identify from the results? Based on what? What is the range of the factor loadings? What is item that has the highest factor loading? In conclusion, is this a good measure of break up concern and why?
 
+We can only identify one factor from the results, because there is only one point on the scree plot that is above the flattened point and simulated data, and the Eigenvalue is greater than 1. The range of the factor loadings is between 0.823 - 0.940, and FSMI51 has the highest factor loading. This subscale is a good measure of breakup concern because all of the factor loadings are above 0.4, and this one factor can explain 84% of the variance in the items. 
+
 # Q3: Pick another subscale from FSMI. Test reliability and factor analysis. Answer all the questions  above. 
+
+#Testing reliability for Affiliation (Independence) subscale
+```{r}
+
+Alpha(lab9data, "FSMI", 25:30)
+
+```
+# Q1: What is the Cronbach's alpha of this subscale? Is it a reliable measure of status seeking? Why? 
+The Cronbach's alpha of this scale is 0.86, which means it is a reliable measure of status seeking because a Cronbach's alpha above 0.7 is considered "acceptable", and over 0.8 is considered "good"
+
+```{r}
+
+EFA(lab9data, "FSMI", 25:30, method = "pa", plot.scree = TRUE, nfactors = c("parallel"))
+
+```
+# Q2: How many factors can you identify from the results? Based on what? What is the range of the factor loadings? What is item that has the highest factor loading? In conclusion, is this a good measure of break up concern and why?
+
+We can only identify one factor from the results, because there is only one point on the scree plot that is above the flattened point and simulated data, and the Eigenvalue is greater than 1. The range of the factor loadings is between 0.534 - 0.846, and FSMI30 has the highest factor loading. This subscale is a good measure of breakup concern because all of the factor loadings are above 0.4, and this one factor can explain 60% of the variance in the items. 
+
